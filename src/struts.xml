@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!-- 
+  详解：
+   1、该配置文件的位置和名称是固定的。
+   2、配置<constant>可以修改struts2的默认常量，这些默认常量在包路径为struts2-core-2.2.1/org.apache.struts2/default.properties中
+ -->
+<struts>
+  <constant name="struts.i18n.encoding" value="UTF-8"></constant><!-- 一般项目中会常配置这个 -->
+  <include file="struts-01.xml"></include><!-- 引入配置文件，用以action的配置 -->
+</struts>   

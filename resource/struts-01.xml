@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!-- 
+  详解：
+   1、这是个要引入struts.xml的配置文件，用于分模块开发
+   2、<package>标签：类似于包，用于对action分类，区别action
+	      （1）name属性：name值得配置与程序功能无关，主要用以区别<package>,可以随便写，但多个<package>的name值不能相同
+	      （2）extends属性：该属性值是固定的，配置之后下面的action类才具有action功能
+	      （3）namespace：和action标签的name值构成路径，该属性不写将默认值为"/"
+   3、<result>标签的type属性指定action跳转的路径是通过转发方式还是重定向方式，默认是转发方式，有四个值：
+	     （1）dispatcher:转发（用于页面转发）
+	     （2）redirect:请求重定向（用于叶面）
+   	     （3）chain:转发（用于转发action，一般不用，因为存在缓存问题）
+   	     （4）redirectAction:请求重定向到另一个action
+   4、使用通配符配置methed属性：
+	     （1）name="Db_*"中的*就可以匹配方法名，在methed属性里配置{1}表示该方法匹配第一个星号
+   5、<global-results>全局结果页面：当某个具体的action返回一个字符串，而这个字符串已经配置到全局页面中是，就会访问全局配置中的页面
+                不必自己再配置<result>,这个全局页面只在当前package下生效
+ -->
+<struts>
+  <package name="com" namespace="/" extends="struts-default">
+    <!-- 全局结果页面配置 -->
+    <global-results>
+     <result name="success">/jsp/success.jsp</result>
+    </global-results>
+    <action name="action_1" class="com.TestAction" method="action_1"></action>
+    <action name="action_2" class="com.TestAction" method="action_2">
+    <result name="success" type="redirectAction">action_1</result>
+    </action>
+    <action name="action_*" class="com.TestAction" method="{1}">
+    </action>
+  </package>
+</struts>   
